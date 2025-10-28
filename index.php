@@ -42,6 +42,11 @@ if(isset($_GET['msg'])) {
     if($_GET['msg'] === 'success') echo "<div class='msg success'>✅ Thêm người dùng thành công!</div>";
     if($_GET['msg'] === 'error') echo "<div class='msg error'>❌ Lỗi khi thêm người dùng!</div>";
     if ($_GET['msg'] === 'empty')   echo "<div class='msg empty'>⚠️ Vui lòng nhập đầy đủ thông tin!</div>";
+    if ($_GET['msg'] === 'deleted') echo "<div class='msg success'>🗑️ Xóa người dùng thành công!</div>";
+    if ($_GET['msg'] === 'delete_error') echo "<div class='msg error'>❌ Lỗi khi xóa người dùng!</div>";
+    if ($_GET['msg'] === 'invalid') echo "<div class='msg empty'>⚠️ ID không hợp lệ!</div>";
+    if ($_GET['msg'] === 'updated') echo "<div class='msg success'>✅ Cập nhật thành công!</div>";
+    if ($_GET['msg'] === 'update_error') echo "<div class='msg error'>❌ Cập nhật thất bại!</div>";
 }
 ?>
 <form method="POST" action="create.php">
@@ -56,6 +61,7 @@ if(isset($_GET['msg'])) {
         <th>Tên</th>
         <th>Email</th>
         <th>Ngày tạo</th>
+        <th>Action</th>
     </tr>
     <?php while ($row = $result->fetch_assoc()): ?>
     <tr>
@@ -63,6 +69,14 @@ if(isset($_GET['msg'])) {
         <td><?= htmlspecialchars($row['name']) ?></td>
         <td><?= htmlspecialchars($row['email']) ?></td>
         <td><?= $row['created_at'] ?></td>
+        <td>
+            <a href="delete.php?id=<?= $row['id'] ?>" onclick="return confirm('Do you want to delete this user?')">
+                ❌
+            </a>
+            <a href="update.php?id=<?= $row['id'] ?>">
+                📝
+            </a>
+        </td>
     </tr>
     <?php endwhile; ?>
 </table>
