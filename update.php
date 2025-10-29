@@ -95,11 +95,6 @@ if(isset($_POST["update"])) {
 </head>
 <body>
     <h2>📝 Cập nhật người dùng</h2>
-
-    <?php if (isset($error)): ?>
-        <p class="error"><?= $error ?></p>
-    <?php endif; ?>
-
     <form method="POST" action="update.php">
         <input type="hidden" name="id" value="<?= htmlspecialchars($user['id']) ?>">
 
